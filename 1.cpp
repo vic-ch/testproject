@@ -591,6 +591,8 @@ int main() {
 
 */
 
+
+/*
 #include<iostream>
 #include<string>
 
@@ -601,9 +603,344 @@ int main() {
     string s1, s2;
     getline(cin, s1);
     getline(cin, s2);
+    int s2len= s2.length();
 
-    cout << s1.find(s2);
+    for (int i = 0;; i++) {
+
+        int idxF = s1.find(s2);
+           if (idxF==s1.npos)break;
+        int idxB = idxF + s2len;
+        s1 = s1.substr(0, idxF) + s1.substr(idxB);
+        
+    }
+
+    cout << s1;
+
+    return 0;
+}
+
+*/
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+struct person {
+    string name;
+    string birthday;
+    char sex='0';
+    string tell;
+    string cell;
+}p[(int)0x7fff];
+
+int main() {
+
+    int N; int K; int q[(int)0x7ff];
+    cin >> N;
+    for (int i = 0; i < N; i++)
+    {
+        cin >> p[i].name >> p[i].birthday >> p[i].sex >> p[i].tell >> p[i].cell;
+    }
+    cin >> K;
+    for (int j = 0; j < K; j++) 
+    {
+        cin >> q[j];
+    }
+
+    for (int j = 0; j < K; j++) {
+        int i;
+        i = q[j];
+        if (i >= N||i<0)
+        {
+            cout << "Not Found\n";
+            continue;
+        }
+        cout << p[i].name << ' ' << p[i].tell << ' ' << p[i].cell << ' ' << p[i].sex << ' ' << p[i].birthday   <<'\n';
+    }
+    return 0;
+}
+
+*/
+
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+
+    string s;
+    getline(cin, s);
+    if (s == ".") { return 0; }
+    int idx = 0;
+
+    while (idx != s.npos)
+    {
+        idx = s.find(" ");
+
+
+        int ifThesLastOneIsBlank = 0;
+        if (ifThesLastOneIsBlank == 1)
+        {
+            s.erase(0, 1);
+            continue;
+        }
+
+        if (s[idx + 1] == ' ')
+        {
+            ifThesLastOneIsBlank = 1;
+            s = s.substr(idx + 1);
+            continue;
+        }
+
+
+
+        ifThesLastOneIsBlank = 0;
+        if (idx == s.npos)
+        {
+            cout << s.length() - 1;
+            break;
+        }
+
+        cout << idx << ' ';
+        s = s.substr(idx + 1);
+        // cout<<s;
+
+    }
 
 
     return 0;
 }
+*/
+
+
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+
+    string s; //s = "         1          2";
+    getline(cin, s);
+    if (s == ".") { return 0; }
+    int idx = 0;
+    int len = s.length();;
+
+    //剪去头部的空格
+    while(s[0]==' '){
+       s= s.substr(1);
+    }
+
+    //剪去中间的空格
+    for(int i=0;i<len;i++)
+    {
+        if (s[i] == ' ' && s[i + 1] == ' ')
+        {
+            s = s.substr(0, i) + s.substr(i+1);
+            i--;
+        }
+        len = s.length();
+        //cout << "len:" << len <<' ' << s << endl;
+    }
+
+    //句点前也可能有一堆空格，因为上面已经去掉了所有连续的空格，只剩一个，所以只用删去句点前的最后一个空格即可
+    if(s[s.length() - 2]==' ')
+    s = s.substr(0, s.length()-2)+'.';
+    //cout << s<<endl;
+
+    //逐个判断长度并输出
+    while (idx != s.npos)
+    {
+        idx = s.find(" ");
+        if (idx == s.npos)
+        {
+            cout << s.length() - 1;
+            break;
+        }
+        cout << idx << ' ';
+        s = s.substr(idx + 1);
+    }
+   // cout << s;
+      
+    return 0;
+}
+
+*/
+
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+    int a, n; int x;
+    //scanf("%d %d",&a,&n);
+    cin >> a >> n; x = n;
+    int s[100005]; int tem; int d;
+    for (int i = 0; i < n; i++)
+    {
+        tem = a * (x - i);
+        while (tem) 
+        {
+            int j = 0;
+            d = tem % 10; 
+            s[j] = s[j] + d;
+            while (s[j]>=10) 
+            {
+                int k = 1; int f=0;
+                f = s[j] % 10;
+                s[j + k] += f;
+                s[j] /= 10;
+            }
+            tem/= 10;
+        }
+    }
+    for (int i = 0; i < 5; i++) {
+        cout << s[i]<<'\n';
+    }
+
+        return 0;
+}
+*/   
+
+
+
+/*
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+int main() {
+    int win =0; //R:1 T: 2  Both :0
+    int t;
+    cin >> t;
+    int terms = 0; int left = 0; int distantR = 0; int distantT = 0;
+    terms = t / 90;
+    left = t - 90 * terms;
+
+
+    if (left == 0||left==30||left==45||left==60) 
+    {
+        distantR = distantT = 270 * terms+left*3;
+        win = 0;
+    }
+    if (left > 0 && left < 30)
+    {
+        win = 1;
+        if(left<10) distantR = 270 * terms + left * 9;
+        else distantR = 270 * terms;
+        distantT = 270 * terms + left * 3;
+    }
+
+    if (left > 30 && left <=40)
+    {
+        win = 2;
+        distantR = 270 * terms+90;
+        distantT = 270 * terms + left * 3;
+    }
+
+    if (left > 40 && left < 45)
+    {
+        win = 2;
+        distantR = 270 * terms +90+ (left-40) * 9;
+        distantT = 270 * terms + left * 3;
+    }
+
+    if (left > 45 && left <= 50)
+    {
+        win = 1;
+        distantR = 270 * terms +90+ (left-40) * 9;
+        distantT = 270 * terms + left * 3;
+    }
+
+    if (left > 50 && left < 60)
+    {
+        win = 1;
+        distantR = 270 * terms + 180 ;
+        distantT = 270 * terms + left * 3;
+    }
+
+    if (left > 60 && left <=80)
+    {
+        win = 2;
+        distantR = 270 * terms + 180;
+        distantT = 270 * terms + left * 3;
+    }
+
+
+    if (left > 80 && left < 90)
+    {
+        win = 2;
+        distantR = 270 * terms + 180+(left-80)*9;
+        distantT = 270 * terms + left * 3;
+    }
+
+
+    if (win == 0) 
+    {
+        cout << "-_- "; cout << distantR;
+    }
+    if (win == 1)
+    {
+        cout << "^_^ "; cout << distantR;
+    }
+    if (win == 2)
+    {
+        cout << "@_@ "; cout << distantT;
+    }
+
+    return 0;
+}
+
+*/
+
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+struct S {
+    string str;
+}s[500000];
+int main() {
+    int n = 1;
+    //cin >> n;
+
+    for (int i = 0; ; i++) {
+        char a = '0'; a = getchar();
+        if (a == '\n')break;
+        else if (a != ' ')
+        {
+            cin >> s[i].str;
+            s[i].str = a + s[i].str;
+            n++;
+        }
+        else {
+            cin >> s[i].str;
+            n++;
+        }
+
+
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0;; j++) {
+            if (s[i].str[j] = ' ')s[i].str = s[i].str.substr(j+1);
+            else break;
+        }
+    }
+
+    //cout << s[1].str;
+    for (int i = n - 1; i >= 0; i--) {
+        cout << s[i].str << ' ';
+    }
+    
+    return 0;
+}
+
+*/
+
