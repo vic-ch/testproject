@@ -945,4 +945,285 @@ int main() {
 */
 
 
+/*
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
 
+int main() {
+    int ages[51];
+    for (int i = 0; i < 51; i++) {
+        ages[i] = 0;
+    }
+    int N; cin >> N;
+    for (int i = 0; i < N; i++)
+    {
+        int tempn;
+        cin >> tempn;
+        for (int j = 0; j < 51; j++) 
+        {
+            if(tempn==j)
+            {
+                ages[j]++; break;
+            }
+        }
+    }
+
+    for (int i = 0; i < 51; i++) {
+        if (ages[i] != 0) {
+            cout << i << ':' << ages[i] << '\n';
+        }
+        else continue;
+    }
+
+    //
+   // for (int i = 0; i < 51; i++) {
+    //    if (i % 10 == 0)cout << '\n';
+    //    cout << ages[i];
+
+
+
+
+    return 0;
+}
+*/
+
+
+
+/*
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<string>
+using namespace std;
+//long  s[200000];
+//long  ss[200000];
+
+struct S {
+    string s;
+   unsigned int n;
+}str1[200000];
+
+int main() {
+    //memset(s, 0, 200000);
+    //memset(ss, 0, 200000);
+    S str2[200000];
+    string s1; 
+    string t;
+    int N; cin >> N;
+    int countT = 0;
+
+    for (int i = 0; i < 2 * N; i++) 
+    {
+       // cin >> s[i];
+        cin >> t;   
+        //int flag = 0;
+        for (int j = 0; j < i; j++) 
+        {
+            if (str2[j].s == t)
+            {
+                //flag = 1;
+                break;
+            }
+            else {
+                str2[countT].s = t;
+                countT++;
+            }
+        }
+        str1[i].s = t;
+        s1 += t;
+    }
+   // int s1len = s1.length();
+
+    for (int i = 0; i < countT; i++)
+    {
+        string q ="1";
+        str2->n = count(s1.begin(), s1.end(),q );
+    }
+
+    for (int i = 0; i < countT; i++) {
+
+        cout << str2->s<<' ' << str2->n << '\n';
+    }
+    cout << s1;
+    
+    return 0;
+}
+
+*/
+
+/*
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<string>
+using namespace std;
+//long long s[200000];
+
+struct d {
+    int n =1;
+    long  long tell;
+   
+
+}s[200000];
+
+bool cmp(d a,d b) {
+       return a.tell<b.tell;
+}
+
+bool cmp2(d a, d b) {
+    if (a.n != b.n)
+        return a.n > b.n;
+    else return a.tell < b.tell;
+}
+int main() {
+   // memset(s,200000,0);
+    int N; cin >> N;
+    for (int i = 0; i < 2*N; i++) 
+    {
+        cin >> s[i].tell;
+    }
+
+    sort(s, s + 2 * N,cmp);
+  
+
+    
+    for (int i = 0; i < 2 * N; i++) {
+       // int j = 0;
+        if (s[i].tell == s[i + 1].tell)
+        {   
+            s[i+1].n = s[i].n + 1;
+        }
+        
+    }
+    //for (int i = 0; i < 2 * N; i++) {
+  //      cout << s[i].tell << ' ' << s[i].n << '\n';
+//    }
+
+    sort(s, s + 2 * N, cmp2);
+
+    if(s[0].n!=s[1].n)
+    cout <<s[0].tell<<' ' << s[0].n;
+    else
+    {
+        int countRepeat = 0;
+        for (int i = 0; i < 2 * N; i++) {
+            if (s[i].n == s[0].n)countRepeat++;
+            else break;
+        }
+        cout << s[0].tell << ' ' << s[0].n << ' ' <<countRepeat ;
+    }
+    return 0;
+}
+
+*/
+
+
+
+
+/*
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+struct studnent {
+    string name;            //学生姓名
+    int nc = 0;             //该学生选课数量
+    int c[20];              //该学生选课清单
+}s[40000];
+
+struct course {
+    int cid;                //课程编号
+    string s[200];         //该课程选课学生名单
+    int n = 0;              //该课程选课学生数量
+}c[2501];
+
+bool cmp(string a, string b) {
+    //字典排序
+    if (a[0] != b[0]) {
+        return a[0] < b[0];
+    }
+    else {
+        if (a[1] != b[1]) {
+            return a[1] < b[1];
+        }
+        else {
+            if (a[2] != b[2]) {
+                return a[2] < b[2];
+            }
+            else {                
+                return a[3] < b[3];               
+            }
+        }
+
+    }
+}
+
+int main() {
+
+    //ADD
+    //设置课程编号
+    for (int i = 0; i < 2500; i++) {
+        c[i].cid = i;
+    }
+
+
+
+    //输入
+    cin.tie(NULL);
+    int N; cin >> N;
+    int K; cin >> K;
+
+    string temps;           //临时学生名
+    int tempi;              //临时学生选课课程遍号
+    for (int i = 0; i < N; i++)
+    {
+        cin >> s[i].name >> s[i].nc;
+        for (int j = 0; j < s[i].nc; j++)
+        {
+            cin >> s[i].c[j];
+        }
+    }
+
+    //
+    for (int i = 0; i < N; i++)
+    {
+        temps = s[i].name;
+        for (int j = 0; j < s[i].nc; j++)
+        {
+            tempi = s[i].c[j];           
+
+            c[tempi].s[c[tempi].n] = temps;//写入学生姓名
+            c[tempi].n++;               //课程选课人数增加
+        }
+    }
+
+    //
+    for (int i = 1; i <= K; i++)
+   {
+        sort(c[i].s,c[i].s+c[i].n, cmp);
+    }
+
+    //
+
+
+
+    for (int i = 1; i <= K; i++)
+    {
+        cout << c[i].cid << ' ' << c[i].n << '\n';
+        for (int j = 0; j <c[i].n; j++)
+        {
+            cout << c[i].s[j] << '\n';
+        }
+    }
+
+    return 0;
+}
+*/
