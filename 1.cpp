@@ -1,4 +1,4 @@
-﻿//**/
+﻿
 
 /*
 #include<iostream>
@@ -1227,3 +1227,109 @@ int main() {
     return 0;
 }
 */
+/*
+
+
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<string>
+#include<vector>
+using namespace std;
+
+struct vip {
+    string id;
+    int distance=0;
+};
+vector<struct vip>s;
+vector<string>quiry;
+//vector<int>n;
+bool cmp(vip a, vip b) {
+    return a.id< b.id;
+}
+
+bool cmp1(vip a, vip b) {
+    return a.distance >b.distance;
+}
+
+int main() {
+    int N; int K;
+    cin >> N >> K;
+
+    int countC=N;
+
+    for (int i = 0; i < N; i++) 
+    {
+        vip v;
+        cin >> v.id;
+        cin >> v.distance; 
+        if (v.distance < K) 
+        {
+            v.distance = K; 
+        }
+        s.push_back(v); 
+    }
+    
+    int M; cin >> M;
+    for (int i = 0; i < M; i++)
+    {
+        string x; cin >> x;
+        quiry.push_back(x);
+    }
+
+    for (int i = 0; i < countC; i++) {
+       
+        if (s[i + 1].id == s[i].id) {
+            s[i].distance += s[i+1].distance;
+            s.erase(s.begin()+i+1);
+            countC--;
+        }
+    }
+
+    sort(s.begin(), s.begin() + countC, cmp1);
+
+    for (int i = 0; i <M; i++)
+    {
+        int flag = 0;
+        for (int j = 0; j < countC; j++) 
+        {
+            if (quiry[i] == s[j].id)
+            {
+                cout << s[j].distance << '\n';
+                flag = 1;
+                break;
+            }
+            else flag = 0;
+        }
+        if (flag == 1)continue;
+        else cout << "No Info\n";
+    }
+    return 0;
+}
+
+*/
+
+/*
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<string>
+#include<vector>
+using namespace std;
+
+struct st {
+    int a; int b; int c; 
+    int r1;
+
+}t[224];
+
+
+int main() {
+
+
+    return 0;
+}
+
+*/
+
